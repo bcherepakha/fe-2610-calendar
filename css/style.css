@@ -1,0 +1,50 @@
+.calendar
+{
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+
+    font-size: 18px;
+}
+
+.calendar__days-names,
+.calendar__days
+{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.calendar__days-names
+{
+    margin-bottom: 12px;
+}
+
+.calendar__day-name
+{
+    flex: 1 1 0;
+    text-align: center;
+}
+
+.calendar__days
+{
+    flex-wrap: wrap;
+}
+
+.calendar__day
+{
+    flex: 0 0 calc(100% / 7);
+    text-align: center;
+}
+
+.calendar__day--not-in-month
+{
+    color: lightgray;
+}
+
+.calendar__day--current
+{
+    color: red;
+}
