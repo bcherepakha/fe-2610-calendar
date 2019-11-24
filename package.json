@@ -1,0 +1,23 @@
+{
+  "name": "fe2610",
+  "version": "1.0.0",
+  "description": "fe-2610 calendar first app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcherepakha/fe-2610-calendar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bcherepakha/fe-2610-calendar/issues"
+  },
+  "homepage": "https://github.com/bcherepakha/fe-2610-calendar#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "htmlhint": "^0.11.0"
+  }
+}
