@@ -1,5 +1,5 @@
 class Board {
-    constructor({boardSelector}) {
+    constructor({boardSelector, statisticSelector, statisticPartsSelector = {}}) {
         this.board =
             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
             .sort(function() { return Math.random() - 0.5; })
@@ -26,6 +26,30 @@ class Board {
 
         this.boardElement.addEventListener('click', this.tryToMoveListener);
         this.steps = 0;
+
+        if (statisticSelector) {
+            this.statisticContainer = document.querySelector(statisticSelector);
+
+            if (this.statisticContainer) {
+                this.statisticPartsContainer = {};
+
+                for (const statPartName in statisticPartsSelector) {
+                    const selector = statisticPartsSelector[statPartName];
+
+                    this.statisticPartsContainer[statPartName] = document.querySelector(selector);
+                }
+            }
+
+            this.fillStatistic();
+        }
+    }
+
+    fillStatistic() {
+        if (this.statisticContainer) {
+            if (this.statisticPartsContainer.steps) {
+                this.statisticPartsContainer.steps.innerText = this.steps;
+            }
+        }
     }
 
     fillBoard() {
@@ -70,9 +94,9 @@ class Board {
         if (movedChip && movedChip.place >= 0 && movedChips[movedChip.place]) {
             this.board[0] = movedChip.place;
             movedChip.move(zeroPlace);
+            this.steps++;
             this.render();
             this.isWin();
-            this.steps++;
         }
     }
 
@@ -101,6 +125,8 @@ class Board {
 
                 return '';
             });
+
+        this.fillStatistic();
     }
 
     isWin() {
@@ -171,7 +197,11 @@ class Chip {
 
 
 const board = new Board({
-    boardSelector: '.board'
+    boardSelector: '.board',
+    statisticSelector: '.statistic',
+    statisticPartsSelector: {
+        steps: '.statistic__steps'
+    }
 });
 
 console.log(board);
