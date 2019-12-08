@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TodoList</title>
+    <script type="module" src="./store.js"></script>
+    <script type="module" src="user.js"></script>
+    <script type="module" src="posts.js"></script>
+    <script type="module" src="todolist.js"></script>
+</head>
+<body>
+    <form id="select-user">
+        <label>
+            Choose user:
+            <select id="user">
+            </select>
+        </label>
+        <button type="submit">Choose</button>
+    </form>
+    <section id="user-info">
+    </section>
+    <div id="user-controls" hidden>
+        <button id="get-user-posts">Get Posts</button>
+        <button id="get-user-todo">Get TodoList</button>
+    </div>
+    <section id="posts">
+    </section>
+    <section id="todolist">
+    </section>
+</body>
+</html>
