@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 15</title>
+    <script defer src="index.ts"></script>
+    <link rel="stylesheet" href="style.less">
+</head>
+<body>
+    <h1>TodoMVC</h1>
+    <form class="add-task">
+        <input
+            class="add-task__complete-all"
+            aria-label="Togle complete in all task"
+            type="checkbox"
+            name="completeAll" />
+        <input
+            class="add-task__text"
+            aria-label="Enter task text"
+            type="text"
+            name="task"
+            value=""
+            placeholder="What needs to be done?"/>
+        <button type="submit" class="add-task__submit">
+            Add task
+        </button>
+    </form>
+    <ul class="task-list">
+    </ul>
+</body>
+</html>

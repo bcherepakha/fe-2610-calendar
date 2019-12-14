@@ -4,6 +4,7 @@
   "description": "fe-2610 calendar first app",
   "main": "index.js",
   "scripts": {
+    "lesson15": "parcel ./lesson15/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,9 @@
   "homepage": "https://github.com/bcherepakha/fe-2610-calendar#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
-    "htmlhint": "^0.11.0"
+    "htmlhint": "^0.11.0",
+    "less": "^3.10.3",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.7.3"
   }
 }
