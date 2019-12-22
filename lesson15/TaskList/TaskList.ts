@@ -17,17 +17,22 @@ export class TaskList {
     constructor(props: ITaskListProps) {
         const {selector, tasks = [], onTaskChange, onTaskDelete} = props;
 
-        this._tasks = tasks.map(task => new Task({
-            ...task,
-            onChange: onTaskChange,
-            onDelete: this.deleteTask.bind(this, task.id)
-        }));
-
         this._filter = this.defaultFilter;
 
         this._onTaskChange = onTaskChange;
         this._onTaskDelete = onTaskDelete;
         this._container = document.querySelector(selector);
+
+        this.loadTasks(tasks);
+    }
+
+    loadTasks(tasks: ITaskProps[]) {
+        this._tasks = tasks.map(task => new Task({
+            ...task,
+            onChange: this._onTaskChange,
+            onDelete: this.deleteTask.bind(this, task.id)
+        }));
+
         this.render();
     }
 

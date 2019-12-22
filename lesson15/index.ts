@@ -10,14 +10,18 @@ const addTaskForm = new AddTaskForm({
     }),
     taskList = new TaskList({
         selector: '.task-list',
-        tasks: loadTasks(),
+        tasks: [],
         onTaskChange: onTaskChange,
         onTaskDelete: onTaskDelete
     }),
     filter = new Filter({
         selector: '.filter-task',
         onFilterChange: onFilterChange
-    });
+    }),
+    loadingEl = document.querySelector('.loading') as HTMLDivElement;
+
+loadTasks();
+loadFilter();
 
 function onAddTask(taskText: string, completed?: boolean) {
     taskList.addTask(taskText);
@@ -51,6 +55,8 @@ function onFilterChange() {
             taskList.setFilter();
             break;
     }
+
+    saveFilter();
 }
 
 function filterTasks(completed: boolean, task: Task) {
@@ -61,11 +67,41 @@ function saveTasks() {
     window.localStorage.tasks = taskList.toString();
 }
 
+// function loadTasks() {
+//     try {
+//         return JSON.parse(window.localStorage.tasks);
+//     } catch(ex) {
+//         console.error(ex);
+//         return [];
+//     }
+// }
+
+function saveFilter() {
+    window.localStorage.filter = filter.value;
+}
+
+function loadFilter() {
+    const filterSaved = +window.localStorage.filter,
+        filterValue = isNaN(filterSaved) ? FILTER_ALL : filterSaved;
+
+    filter.setFilter(filterValue);
+}
+
 function loadTasks() {
-    try {
-        return JSON.parse(window.localStorage.tasks);
-    } catch(ex) {
-        console.error(ex);
-        return [];
-    }
+    loadingEl.hidden = false;
+
+    fetch('https://jsonplaceholder.typicode.com/todos?userId=1')
+        .then(response => response.json())
+        .then(data => {
+            return data.map(task => ({
+                id: task.id,
+                completed: task.completed,
+                text: task.title
+            }));
+        })
+        .then(data => {
+            loadingEl.hidden = true;
+
+            taskList.loadTasks(data)
+        });
 }

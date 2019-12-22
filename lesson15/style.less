@@ -1,3 +1,44 @@
 @import './AddTaskForm/style.less';
 @import './TaskList/style.less';
 @import './Filter/style.less';
+
+.loading
+{
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background: rgba(0, 0, 0, .5);
+}
+
+.loading-img
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+    width: 50px;
+    height: 50px;
+
+    border: 3px solid blue;
+
+    animation: rotateLoading 2s linear 0s infinite;
+}
+
+@keyframes rotateLoading {
+    from {
+        transform: translate(-25px, -25px) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-25px, -25px) rotate(720deg);
+    }
+
+    to {
+        transform: translate(-25px, -25px) rotate(360deg);
+    }
+}
