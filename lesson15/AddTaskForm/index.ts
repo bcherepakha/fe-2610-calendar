@@ -1,4 +1,4 @@
-type TOnAddTask = (text: string) => void;
+type TOnAddTask = (text: string, completed?: boolean) => void;
 
 interface AddTaskFormProps {
     selector: string;
@@ -29,11 +29,11 @@ export class AddTaskForm {
     submitForm(event: Event) {
         event.preventDefault();
 
-        const {addTaskTextElement} = this,
+        const {addTaskTextElement, completeTaskElement} = this,
             taskText = addTaskTextElement.value;
 
         if (taskText) {
-            const a = this.onAddTask(taskText);
+            const a = this.onAddTask(taskText, completeTaskElement.checked);
 
             addTaskTextElement.value = '';
         }

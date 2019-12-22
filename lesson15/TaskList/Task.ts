@@ -3,6 +3,7 @@ export interface ITaskProps {
     completed: boolean;
     id: number;
     onChange?: (task: Task) => void;
+    onDelete?: () => void;
 }
 
 export class Task {
@@ -12,15 +13,17 @@ export class Task {
     _container: HTMLLIElement;
     _completeElement: HTMLInputElement;
     _onChange: (task: Task) => void;
+    _onDelete?: () => void;
 
     constructor(props: ITaskProps) {
-        const {text, completed, id, onChange} = props;
+        const {text, completed, id, onChange, onDelete} = props;
 
         this._id = id;
         this._completed = completed;
         this._text = text;
 
         this._onChange = onChange;
+        this._onDelete = onDelete;
 
         this.createElement();
     }
@@ -37,6 +40,7 @@ export class Task {
 
         deleteBtn.innerText = 'Delete';
         deleteBtn.className = 'task__delete';
+        deleteBtn.addEventListener('click', this.onDelete.bind(this));
 
         textElement.innerText = _text;
         textElement.className = 'task__text';
@@ -68,8 +72,29 @@ export class Task {
         this.setCompleted(this._completeElement.checked);
     }
 
+    onDelete() {
+        this._onDelete();
+        this._container.remove();
+    }
+
+    getId() {
+        return this._id;
+    }
+
     isCompleted() {
         return this._completed;
+    }
+
+    toSerialized() {
+        return {
+            id: this._id,
+            completed: this._completed,
+            text: this._text
+        };
+    }
+
+    toString() {
+        return JSON.stringify(this.toSerialized());
     }
 
     render() {
